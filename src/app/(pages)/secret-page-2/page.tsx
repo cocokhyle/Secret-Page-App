@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import SecretPage1 from "../secret-page-1/page";
 
 export default function SecretPage2() {
   const [secretMessage, setSecretMessage] = useState<string>("");
@@ -56,19 +57,35 @@ export default function SecretPage2() {
 
   return (
     <div>
-      <h1>Secret Page 2</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <p>
-        Your current secret message: {secretMessage || "No secret message set"}
-      </p>
-      <input
-        type="text"
-        placeholder="Enter new secret message"
-        value={newMessage}
-        onChange={(e) => setNewMessage(e.target.value)}
-      />
-      <button onClick={handleSaveMessage}>Save Secret Message</button>
-      <button onClick={handleUpdateMessage}>Update Secret Message</button>
+      <SecretPage1 hideLinkButton={true} />
+      <div className="flex justify-center items-center py-12">
+        <div className="flex flex-col gap-5 p-5 justify-center items-center w-fit bg-blue-200 rounded-lg">
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          <h1 className="font-bold">Secret Message</h1>
+          <textarea
+            className="w-[300px] h-[200px] border border-gray-300 rounded-lg p-2"
+            placeholder="Enter new secret message"
+            value={newMessage || secretMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+          />
+          {secretMessage && (
+            <button
+              className="px-5 py-2 w-fit text-white bg-blue-700 rounded-lg"
+              onClick={handleUpdateMessage}
+            >
+              Update
+            </button>
+          )}
+          {!secretMessage && (
+            <button
+              className="px-5 py-2 w-fit text-white bg-blue-700 rounded-lg"
+              onClick={handleSaveMessage}
+            >
+              Save
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

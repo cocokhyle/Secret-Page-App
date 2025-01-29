@@ -1,10 +1,15 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
-export default function SecretPage1() {
+interface SecretPage1Props {
+  hideLinkButton: boolean;
+}
+
+export default function SecretPage1({ hideLinkButton }: SecretPage1Props) {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [secretMessage, setSecretMessage] = useState<string>("");
@@ -38,12 +43,41 @@ export default function SecretPage1() {
     }
   };
 
+  if (!session) {
+    return null;
+  }
+  const username = session.user.email?.split("@")[0];
+
   return (
     <div>
-      <h1>Welcome to Secret Page 1</h1>
-      <p>{secretMessage}</p>
-      <button onClick={() => signOut()}>Sign Out</button>
-      <button onClick={handleDeleteAccount}>Delete Account</button>
+      <div className="flex justify-between py-5 px-10 shadow-md items-center">
+        <h1 className="font-bold ">Welcome back {username}!</h1>
+
+        <div className="flex gap-5">
+          <button
+            className="px-5 py-2 w-fit text-white bg-blue-700 rounded-lg"
+            onClick={() => signOut()}
+          >
+            Sign Out
+          </button>
+          <button
+            className="px-5 py-2 w-fit text-white bg-red-700 rounded-lg"
+            onClick={handleDeleteAccount}
+          >
+            Delete Account
+          </button>
+        </div>
+      </div>
+      {!hideLinkButton && (
+        <div className="w-full flex items-center justify-center py-20">
+          <Link
+            className="px-5 py-2 w-fit text-white bg-blue-700 rounded-lg"
+            href="/secret-page-2"
+          >
+            View Secret Messages
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
