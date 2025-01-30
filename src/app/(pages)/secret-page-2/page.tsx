@@ -34,6 +34,7 @@ export default function SecretPage2() {
       // Update the UI to show the new or updated secret message
       setSecretMessage(newMessage);
       setNewMessage(""); // Clear input after saving
+      alert("Message saved successfully!");
     }
   };
 
@@ -50,6 +51,7 @@ export default function SecretPage2() {
       // Update the UI to show the updated secret message
       setSecretMessage(newMessage);
       setNewMessage(""); // Clear input after updating
+      alert("Message updated successfully!");
     } else if (data.error) {
       setError(data.error);
     }
@@ -57,33 +59,36 @@ export default function SecretPage2() {
 
   return (
     <div>
-      <SecretPage1 hideLinkButton={true} />
-      <div className="flex justify-center items-center py-12">
-        <div className="flex flex-col gap-5 p-5 justify-center items-center w-fit bg-blue-200 rounded-lg">
+      <SecretPage1 hideSecret={true} />
+
+      <div className="flex justify-center items-center pt-10">
+        <div className="flex flex-col gap-5 py-5 px-5 justify-center items-center w-fit  border border-gray-200  rounded-lg">
           {error && <p style={{ color: "red" }}>{error}</p>}
-          <h1 className="font-bold">Secret Message</h1>
-          <textarea
-            className="w-[300px] h-[200px] border border-gray-300 rounded-lg p-2"
-            placeholder="Enter new secret message"
-            value={newMessage || secretMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-          />
-          {secretMessage && (
-            <button
-              className="px-5 py-2 w-fit text-white bg-blue-700 rounded-lg"
-              onClick={handleUpdateMessage}
-            >
-              Update
-            </button>
-          )}
-          {!secretMessage && (
-            <button
-              className="px-5 py-2 w-fit text-white bg-blue-700 rounded-lg"
-              onClick={handleSaveMessage}
-            >
-              Save
-            </button>
-          )}
+          <h1 className="font-bold w-full items-start">Secret Message</h1>
+          <div className="flex justify-center items-center gap-3">
+            <textarea
+              className="w-[300px] h-[50px] border border-gray-300 rounded-lg p-2"
+              placeholder="Enter new secret message"
+              value={newMessage || secretMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+            />
+            {secretMessage && (
+              <button
+                className="px-5 py-2 w-fit text-white bg-blue-700 rounded-lg"
+                onClick={handleUpdateMessage}
+              >
+                Update
+              </button>
+            )}
+            {!secretMessage && (
+              <button
+                className="px-5 py-2 w-fit text-white bg-blue-700 rounded-lg"
+                onClick={handleSaveMessage}
+              >
+                Save
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
