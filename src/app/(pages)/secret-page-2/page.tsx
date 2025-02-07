@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import SecretPage1 from "../secret-page-1/page";
+import SecretPage1 from "@/components/secret-page-1/secret-page-1";
 
 export default function SecretPage2() {
   const [secretMessage, setSecretMessage] = useState<string>("");
