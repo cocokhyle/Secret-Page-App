@@ -58,6 +58,7 @@ export default function Home() {
           <input
             className="p-2 border border-gray-300 rounded-md"
             type="email"
+            data-testid="email-input"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -66,6 +67,7 @@ export default function Home() {
           <input
             className="p-2 border border-gray-300 rounded-md"
             type="password"
+            data-testid="password-input"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -75,6 +77,7 @@ export default function Home() {
           <button
             className="bg-blue-700 hover:bg-blue-800 text-white py-3 px-5 rounded-lg"
             type="submit"
+            data-testid="submit-button"
             disabled={isLoading}
           >
             {isLoading ? "Loading..." : isRegistering ? "Register" : "Login"}
